@@ -1,0 +1,20 @@
+# Cross origin resource sharing
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "HEAD"
+        ],
+        "AllowedOrigins": [
+            "http*"
+        ],
+        "ExposeHeaders": [
+            "ETag",
+            "x-amz-meta-custom-header"
+        ],
+        "MaxAgeSeconds": 3000
+    }
+]
