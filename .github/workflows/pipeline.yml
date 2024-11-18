@@ -1,0 +1,59 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js (if applicable, for example)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          npm install  # Replace with your project's package manager
+
+      - name: Build the application
+        run: |
+          npm run build  # Replace with your build command
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js (if applicable)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          npm install  # Replace with your project's package manager
+
+      - name: Run tests
+        run: |
+          npm test  # Replace with your test command
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy application
+        run: |
+          echo "Deploying application..."  # Replace with your deploy command
+          # Example for AWS deploy
+          # aws s3 cp ./build s3://your-bucket-name/ --recursive
